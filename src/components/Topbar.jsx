@@ -18,18 +18,22 @@ const Topbar = () => {
     */
     return(
       <div className='topbar-container'>
-        <div className='topbar-always-visible'>
-          <div className='topbar-title'>
-            <h1 className='topbar-title-text'>Picresse</h1>
-          </div>
-          <Button className='topbar-button btn btn-light' type='button' onClick={() => setIsCollapsed(!isCollapsed)}>
-            { isCollapsed ? <ChevronDoubleDown /> : <ChevronDoubleUp /> }
-          </Button>
+        <div className='topbar-title'>
+          <h1 className='topbar-title-text'>Picresse</h1>
         </div>
 
-        <div className='topbar-dropdown'>
-          dropdown space
+        <div>
+          <Button className='topbar-button btn btn-light' type='button' onClick={() => setIsCollapsed(!isCollapsed)}>
+            { isCollapsed ? <ChevronDoubleUp /> : <ChevronDoubleDown /> }
+          </Button>
+          { isCollapsed ? 
+          <div className='topbar-dropdown'>
+            dropdown
+          </div> : <></>
+        }
         </div>
+      
+        
       </div>
     );
 }
