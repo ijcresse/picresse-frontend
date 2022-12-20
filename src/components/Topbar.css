@@ -1,0 +1,22 @@
+.topbar-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar-always-visible {
+    width: 100%;
+}
+
+.topbar-title {
+    text-align: center;
+    vertical-align: top;
+    padding-top: 1em;
+}
+
+.topbar-button {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    padding: 10px;
+    padding-top: 5px;
+}

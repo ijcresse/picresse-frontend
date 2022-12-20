@@ -2,18 +2,23 @@ import './App.css';
 import React from 'react';
 import { Unity, useUnityContext } from 'react-unity-webgl';
 
+import Topbar from './components/Topbar.jsx';
+
 const App = () => {
+  //TODO: enforce versioning to prevent browser cache errors
+  //TODO: inform player if this doesn't load properly
   const { unityProvider } = useUnityContext({
-    loaderUrl: "build/0.1.0.loader.js",
-    dataUrl: "build/0.1.0.data.unityweb",
-    frameworkUrl: "build/0.1.0.framework.js.unityweb",
-    codeUrl: "build/0.1.0.wasm.unityweb"
+    loaderUrl: "build/picresse.loader.js",
+    dataUrl: "build/picresse.data.unityweb",
+    frameworkUrl: "build/picresse.framework.js.unityweb",
+    codeUrl: "build/picresse.wasm.unityweb"
   });
 
   return (
     <div className="App">
-      <Unity unityProvider={unityProvider} style={{ width: 1200, height: 900 }} /> 
-      <h1>this is my web site - haazasahasmie ;)</h1>
+      <Topbar />
+      {/* <Unity unityProvider={unityProvider} style={{ width: 1200, height: 900 }} />  */}
+      
     </div>
   );
 }
