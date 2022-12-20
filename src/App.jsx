@@ -15,9 +15,11 @@ const App = () => {
   });
 
   return (
-    <div className="App">
+    <div className="app">
       <Topbar />
-      {/* <Unity unityProvider={unityProvider} style={{ width: 1200, height: 900 }} />  */}
+      <div className='app-unity-container'>
+        <Unity unityProvider={unityProvider} className='app-unity-viewport' /> 
+      </div>
       
     </div>
   );

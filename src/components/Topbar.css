@@ -4,7 +4,8 @@
 }
 
 .topbar-always-visible {
-    width: 100%;
+    width: 100vh;
+    max-height: 20vh;
 }
 
 .topbar-title {
@@ -21,11 +22,11 @@
     padding-top: 5px;
 }
 
-.topbar-button-open {
-    transition: all;
-}
-
-.topbar-dropdown {
-    height: 80%;
+.topbar-content {
+    position: absolute;
+    width: 100%;
+    min-height: 80vh;
+    max-height: 100vh;
     text-align: center;
+    background-color: rgb(243, 182, 131);
 }

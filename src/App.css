@@ -1,0 +1,15 @@
+.app {
+    height: 100vh;
+}
+
+.app-unity-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 90%;
+}
+
+.app-unity-viewport {
+    height: 72vh;
+}
