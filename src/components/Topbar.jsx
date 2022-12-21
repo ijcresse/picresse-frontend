@@ -3,6 +3,7 @@ import { ChevronDoubleDown, ChevronDoubleUp } from 'react-bootstrap-icons';
 import Button from 'react-bootstrap/Button';
 
 import './Topbar.css';
+import NavTabs from './NavTabs';
 
 const Topbar = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -18,7 +19,7 @@ const Topbar = () => {
         <div>
           { isCollapsed ? 
           <div className={ isCollapsed ? 'topbar-content' : '' }>
-            lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
+            <NavTabs />
           </div> : <></>
           }
         </div>
