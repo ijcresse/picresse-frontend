@@ -11,5 +11,6 @@
 }
 
 .app-unity-viewport {
-    height: 72vh;
+    height: 80%;
+    aspect-ratio: 16/9;
 }

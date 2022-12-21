@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Unity, useUnityContext } from 'react-unity-webgl';
 
 import Topbar from './components/Topbar.jsx';
