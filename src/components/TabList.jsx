@@ -1,22 +1,37 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import AxiosContext, { baseUrl } from '../context/AxiosContext';
 
 const TabList = () => {
+    const { axiosInstance } = useContext(AxiosContext);
     const [puzzleList, setPuzzleList] = useState(null);
     const [pageSize, setPageSize] = useState(50);
     const [offset, setOffset] = useState(0);
 
     // useEffect(() => {
+    //     fetchList();
     // }, [puzzleList]);
+
+    const fetchList = () => {
+        console.log(baseUrl + "/picresse/puzzle/list?page=" + pageSize + "&offset=" + offset)
+        axiosInstance.get(baseUrl + "/picresse/puzzle/list?page=" + pageSize + "&offset=" + offset)
+            .then((res) => {
+                console.log(res);
+                setPuzzleList(res.data);
+            }).catch((err) => {
+                console.error(err);
+                setPuzzleList([]);
+                //set error toast
+            });
+    }
 
     const renderListItems = () => {
         /*
         axios call to BE with pagesize, offset.
         may overload this with search tab tools... or have search tab on left side or something
         */
-
-        console.log("tablist.renderlistitems");
         return(
             <tr>
                 <td>1</td>
@@ -31,7 +46,9 @@ const TabList = () => {
     }
 
     return(
-        <Table striped bordered hover>
+
+        <div>
+            <Table striped bordered hover>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -46,7 +63,11 @@ const TabList = () => {
             <tbody>
                 {renderListItems()}
             </tbody>
+            
         </Table>
+        <Button onClick={() => fetchList()}>asdf</Button>
+        </div>
+        
     )
 }
 

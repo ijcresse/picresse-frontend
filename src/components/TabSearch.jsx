@@ -11,7 +11,7 @@ const TabSearch = () => {
     const createForm = () => {
         const formGroups = [];
         for (var i = 0; i < formSections.length; i++) {
-            formGroups.push(<Form.Group>
+            formGroups.push(<Form.Group key={formSections[i]}>
                 <Form.Label>{formSections[i]}</Form.Label>
                 <Form.Control type="text" />
             </Form.Group>)
