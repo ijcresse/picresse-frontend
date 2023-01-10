@@ -6,20 +6,18 @@ import AxiosContext, { baseUrl } from '../context/AxiosContext';
 
 const TabList = () => {
     const { axiosInstance } = useContext(AxiosContext);
-    const [puzzleList, setPuzzleList] = useState(null);
+    const [puzzleList, setPuzzleList] = useState();
     const [pageSize, setPageSize] = useState(50);
     const [offset, setOffset] = useState(0);
 
-    // useEffect(() => {
-    //     fetchList();
-    // }, [puzzleList]);
+    useEffect(() => {
+        fetchList();
+    }, []);
 
     const fetchList = () => {
-        console.log(baseUrl + "/picresse/puzzle/list?page=" + pageSize + "&offset=" + offset)
-        axiosInstance.get(baseUrl + "/picresse/puzzle/list?page=" + pageSize + "&offset=" + offset)
+        axiosInstance.get('//' + baseUrl + "/picresse/puzzle/list?page=" + pageSize + "&offset=" + offset)
             .then((res) => {
-                console.log(res);
-                setPuzzleList(res.data);
+                setPuzzleList(res.data[0]['list']);
             }).catch((err) => {
                 console.error(err);
                 setPuzzleList([]);
@@ -28,46 +26,39 @@ const TabList = () => {
     }
 
     const renderListItems = () => {
-        /*
-        axios call to BE with pagesize, offset.
-        may overload this with search tab tools... or have search tab on left side or something
-        */
-        return(
-            <tr>
-                <td>1</td>
-                <td>shami</td>
-                <td>hazashami</td>
-                <td>1x1</td>
-                <td>abcd</td>
-                <td>false</td>
-                <td>nothin here</td>
-            </tr>  
-        );
+        return puzzleList.map(puzzle => {
+            return(
+                <tr key={puzzle[0]}>
+                    <td>{puzzle[0]}</td>
+                    <td>{puzzle[1]}</td>
+                    <td>{puzzle[2]}</td>
+                    <td>{puzzle[3]}</td>
+                    <td>{puzzle[4] + 'x' + puzzle[5]}</td>
+                    <td>{puzzle[6]}</td>
+                    <td>button placeholder</td>
+                </tr>
+            )
+        })
     }
 
     return(
-
-        <div>
+        puzzleList ? 
             <Table striped bordered hover>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Puzzle Name</th>
-                    <th>Creator Name</th>
-                    <th>Dimensions</th>
-                    <th>Code</th>
-                    <th>Completed</th>
-                    <th>button placeholder section</th>
-                </tr>
-            </thead>
-            <tbody>
-                {renderListItems()}
-            </tbody>
-            
-        </Table>
-        <Button onClick={() => fetchList()}>asdf</Button>
-        </div>
-        
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Puzzle Name</th>
+                        <th>Creator Name</th>
+                        <th>Code</th>
+                        <th>Dimensions</th>
+                        <th>Date Created</th>
+                        <th>button placeholder section</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { puzzleList ?  renderListItems() : <></> }
+                </tbody>
+            </Table> : <>No Results</>
     )
 }
 
