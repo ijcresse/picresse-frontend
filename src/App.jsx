@@ -1,7 +1,7 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Unity, useUnityContext } from 'react-unity-webgl';
-
+import { AxiosProvider } from './context/AxiosContext';
 import Topbar from './components/Topbar.jsx';
 
 const App = () => {
@@ -15,13 +15,15 @@ const App = () => {
   });
 
   return (
-    <div className="app">
-      <Topbar />
-      <div className='app-unity-container'>
-        <Unity unityProvider={unityProvider} className='app-unity-viewport' /> 
+    <AxiosProvider>
+      <div className="app">
+        <Topbar />
+        <div className='app-unity-container'>
+          {/*TODO: WebGL warning: clientWaitSync: ClientWaitSync must return TIMEOUT_EXPIRED until control has returned to the user agent's main loop. (only warns once)  */}
+          {/* <Unity unityProvider={unityProvider} className='app-unity-viewport' />  */}
+        </div>
       </div>
-      
-    </div>
+    </AxiosProvider>
   );
 }
 
