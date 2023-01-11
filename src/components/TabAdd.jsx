@@ -1,14 +1,21 @@
 import { useRef, useContext } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import AxiosContext from '../context/AxiosContext';
+import AxiosContext, { baseUrl } from '../context/AxiosContext';
 
 const TabAdd = () => {
-    const { axiosInstance, baseUrl } = useContext(AxiosContext);
+    const { axiosInstance } = useContext(AxiosContext);
 
-    // const verifyBase64Correctness = () => {
-    //     ReactDOM.findDOMNode(puzzleCode);
-    // }
+    const verifyBase64Correctness = () => {
+        try {
+            atob(codeInput.current.value);
+        } catch (error) {
+            console.error("Could not verify code as valid base64: " + codeInput.current.value);
+            //create error toast in this case
+            return false;
+        }
+        return true;
+    }
 
     const nameInput = useRef(null);
     const creatorInput = useRef(null);
@@ -16,13 +23,26 @@ const TabAdd = () => {
 
     const submitForm = (e) => {
         e.preventDefault();
+        if (!verifyBase64Correctness()) {
+            return; //don't execute!
+        }
+        const headers = {
+            'Content-Type': 'application/json'
+        }
         const data = {
             'name' : nameInput.current.value,
             'creator' : creatorInput.current.value,
-            'code' : codeInput.current.value
+            'puzzle' : codeInput.current.value
         }
-        //axiosInstance.post('//' + baseUrl + "/picresse/puzzle/create", )
-        console.log(data);
+        axiosInstance.post('//' + baseUrl + "/picresse/puzzle/create", data, { headers: headers })
+            .then((res) => {
+                console.log(res.status);
+                //create toast
+            }).catch((err) => {
+                console.error(err.response.status);
+                console.error(err.response.data);
+                //create toast
+            })
     }
 
     return(
